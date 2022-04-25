@@ -1,5 +1,6 @@
-import 'package:workout_places_app/models/place/rating/rating.dart';
 import 'package:collection/collection.dart';
+
+import 'rating.dart';
 
 class GeneralRating {
   double _averageValue;
@@ -13,5 +14,5 @@ class GeneralRating {
 
   double get averageValue => _averageValue;
 
-  // todo add setters for general rating class
+// todo add setters for general rating class
 }

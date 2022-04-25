@@ -1,4 +1,4 @@
-import 'package:workout_places_app/models/user/user.dart';
+import 'package:workout_places_app/domain/models/user/user.dart';
 
 class Rating {
   final User user;
