@@ -1,0 +1,4 @@
+enum WorkoutNovelty {
+  soviet,
+  modern
+}
