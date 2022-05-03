@@ -1,0 +1,4 @@
+enum PlacesMode {
+  MAP,
+  LIST,
+}

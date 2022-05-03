@@ -10,8 +10,9 @@ class WorkoutPlace {
   final GeneralRating rating;
   final String cityName;
   final String locationName;
-
-  // todo add location
+  //final MapLocation location;
+  final double distance;
+  // TODO: Add location
 
   WorkoutPlace({
     required this.size,
@@ -20,5 +21,6 @@ class WorkoutPlace {
     required this.rating,
     required this.cityName,
     required this.locationName,
+    required this.distance,
   });
 }

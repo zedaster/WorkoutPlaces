@@ -14,7 +14,7 @@ class _WorkoutScaffoldState extends State<WorkoutScaffold> {
   // TODO: change to screen class instances
   int _currentIndex = 0;
   final _screens = [
-    const WorkoutListScreen(),
+    const WorkoutPlacesScreen(),
     const Center(child: Text("Favourites Page")),
     const Center(child: Text("Profile and Settings Page")),
   ];

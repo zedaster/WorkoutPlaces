@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:workout_places_app/domain/models/place/workout_novelty.dart';
 import 'package:workout_places_app/domain/models/place/workout_size.dart';
-import 'package:workout_places_app/view/widgets/list/place_features_text.dart';
+import 'package:workout_places_app/view/widgets/places/place_features_text.dart';
 
 class PlaceInfoWidget extends StatelessWidget {
   final double height;
@@ -10,7 +10,7 @@ class PlaceInfoWidget extends StatelessWidget {
   final ImageProvider image;
   final WorkoutSize size;
   final WorkoutNovelty novelty;
-  final int distance;
+  final int? distance;
   final double rating;
 
   const PlaceInfoWidget({
@@ -21,20 +21,20 @@ class PlaceInfoWidget extends StatelessWidget {
     required this.image,
     required this.size,
     required this.novelty,
-    required this.distance,
     required this.rating,
+    this.distance,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(10),
       child: SizedBox(
         height: height,
         child: Column(
           children: [
             Flexible(
-              flex: 3,
+              flex: 4,
               child: Stack(
                 alignment: Alignment.bottomLeft,
                 children: [
@@ -56,7 +56,7 @@ class PlaceInfoWidget extends StatelessWidget {
                         const SizedBox(width: 2),
                         Text(rating.toStringAsFixed(1),
                             style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold))
                       ],
@@ -66,7 +66,7 @@ class PlaceInfoWidget extends StatelessWidget {
               ),
             ),
             Flexible(
-              flex: 2,
+              flex: 3,
               child: Container(
                   decoration: const BoxDecoration(color: Colors.white),
                   child: Padding(
@@ -88,15 +88,16 @@ class PlaceInfoWidget extends StatelessWidget {
                               PlaceFeaturesText(novelty: novelty, size: size)
                             ],
                           ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text("$distance м",
-                                  style: const TextStyle(
-                                    fontSize: 12,
-                                  ))
-                            ],
-                          )
+                          if (distance != null)
+                            Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text("$distance м",
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                    ))
+                              ],
+                            )
                         ],
                       ),
                     ),
