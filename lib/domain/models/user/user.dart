@@ -3,7 +3,7 @@ import 'package:workout_places_app/domain/models/location/city.dart';
 
 class User {
   final String nickname;
-
+  final bool isEmpty;
   String _showingName;
   ImageProvider _avatar;
   City _city;
@@ -15,7 +15,16 @@ class User {
       required City city})
       : _showingName = showingName,
         _avatar = avatar,
-        _city = city;
+        _city = city,
+        isEmpty = false;
+
+  User.empty()
+      : nickname = "unknown",
+        _showingName = "Неизветсный пользователь",
+        _avatar = const NetworkImage(
+            "https://i1.sndcdn.com/artworks-000189080723-ez2uad-t500x500.jpg"),
+        _city = City.unknown(),
+        isEmpty = true;
 
   String get showingName => _showingName;
 

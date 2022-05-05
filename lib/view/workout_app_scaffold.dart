@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'screens/workout_list_screen.dart';
+import 'places/workout_places_screen.dart';
 
 class WorkoutScaffold extends StatefulWidget {
   const WorkoutScaffold({Key? key}) : super(key: key);

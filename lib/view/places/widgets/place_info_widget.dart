@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:workout_places_app/domain/models/place/workout_novelty.dart';
 import 'package:workout_places_app/domain/models/place/workout_size.dart';
-import 'package:workout_places_app/view/widgets/places/place_features_text.dart';
+
+import 'place_features_text.dart';
 
 class PlaceInfoWidget extends StatelessWidget {
   final double height;

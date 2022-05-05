@@ -1,26 +1,29 @@
 import 'package:flutter/material.dart';
-import 'rating/general_rating.dart';
+import 'package:workout_places_app/domain/models/location/map_location.dart';
+
 import 'workout_novelty.dart';
 import 'workout_size.dart';
 
-class WorkoutPlace {
+class ShortPlaceInfo {
+  final int id;
   final WorkoutSize size;
   final WorkoutNovelty novelty;
-  final ImageProvider image;
-  final GeneralRating rating;
+  final ImageProvider mainImage;
   final String cityName;
   final String locationName;
-  //final MapLocation location;
+  final double averageRating;
+  final MapLocation location;
   final double distance;
-  // TODO: Add location
 
-  WorkoutPlace({
+  ShortPlaceInfo({
+    required this.id,
     required this.size,
     required this.novelty,
-    required this.image,
-    required this.rating,
+    required this.mainImage,
     required this.cityName,
     required this.locationName,
+    required this.averageRating,
+    required this.location,
     required this.distance,
   });
 }
