@@ -29,6 +29,7 @@ class WorkoutApp extends StatelessWidget {
             backgroundColor: Colors.white,
             foregroundColor: Colors.black,
           ),
+          backgroundColor: Colors.white38,
           primaryColor: const Color(0xFF00EB00),
         ),
         home: const WorkoutScaffold(),

@@ -45,7 +45,7 @@ class WorkoutPlacesScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                SinglePlaceScreen(placeId: state.places![i].id)));
+                                SinglePlaceScreen(place: state.places![i])));
                   },
                   locationName: state.places![i].locationName,
                   cityName: state.places![i].cityName,
