@@ -19,6 +19,9 @@ class PlacesListScreenPart extends StatelessWidget {
       shrinkWrap: true,
       itemCount: 10,
       itemBuilder: (ctx, i) => PlaceInfoWidget(
+        onTap: () {
+          //Navigator.push(context, MaterialPageRoute(builder: (context) => PlaceInfoScreen(placeId: placeId)))
+        },
         height: 130,
         locationName: "Юлиса Фурчика",
         cityName: "Екатеринбург",

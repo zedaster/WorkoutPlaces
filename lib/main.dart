@@ -25,7 +25,11 @@ class WorkoutApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Workout Places',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
+          ),
+          primaryColor: const Color(0xFF00EB00),
         ),
         home: const WorkoutScaffold(),
       ),

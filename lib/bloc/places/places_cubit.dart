@@ -10,10 +10,7 @@ class PlacesCubit extends Cubit<PlacesState> {
 
   PlacesCubit(PlacesRepository repository)
       : _placesRepository = repository,
-        super(PlacesState.initialState()) {
-    // TODO: Keep initial status instead of loading
-    getMorePlaces();
-  }
+        super(PlacesState.initialState());
 
   Future<void> getMorePlaces() async {
     emit(state.copyWith(status: PlacesStatus.loading));
