@@ -5,7 +5,7 @@ import 'package:workout_places_app/domain/models/place/workout_novelty.dart';
 import 'package:workout_places_app/domain/models/place/workout_size.dart';
 import 'package:workout_places_app/domain/repository/places_repository.dart';
 
-class FakeWorkoutPlacesStorage implements PlacesRepository {
+class FakePlacesStorage implements PlacesRepository {
   @override
   Future<List<ShortPlaceInfo>> getNearPlaces(
       int skip, int count, MapLocation location) async {

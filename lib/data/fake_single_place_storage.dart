@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:workout_places_app/domain/models/place/place_info.dart';
+import 'package:workout_places_app/domain/models/place/full_place_info.dart';
 import 'package:workout_places_app/domain/models/place/rating/general_rating.dart';
 import 'package:workout_places_app/domain/models/place/rating/rating.dart';
 import 'package:workout_places_app/domain/models/place/short_place_info.dart';
 import 'package:workout_places_app/domain/models/user/user.dart';
-import 'package:workout_places_app/domain/repository/place_info_repository.dart';
+import 'package:workout_places_app/domain/repository/single_place_repository.dart';
 
-class FakePlaceInfoStorage implements PlaceInfoRepository {
+class FakeSinglePlaceStorage implements SinglePlaceRepository {
   @override
-  Future<PlaceInfo> getFullInfo(ShortPlaceInfo short) async {
+  Future<FullPlaceInfo> getFullInfo(ShortPlaceInfo short) async {
     // TODO: customize fake users here
     switch (short.id) {
       case 1:
-        return PlaceInfo(
+        return FullPlaceInfo(
           short: short,
           images: [
             short.mainImage,
@@ -26,7 +26,7 @@ class FakePlaceInfoStorage implements PlaceInfoRepository {
           ]),
         );
       case 2:
-        return PlaceInfo(
+        return FullPlaceInfo(
           short: short,
           images: [
             short.mainImage,
@@ -42,7 +42,7 @@ class FakePlaceInfoStorage implements PlaceInfoRepository {
           ]),
         );
       case 3:
-        return PlaceInfo(
+        return FullPlaceInfo(
           short: short,
           images: [
             short.mainImage,
@@ -61,7 +61,7 @@ class FakePlaceInfoStorage implements PlaceInfoRepository {
   }
 
   @override
-  Future<PlaceInfo> getFullInfoById(int id) {
+  Future<FullPlaceInfo> getFullInfoById(int id) {
     // TODO: implement getFullInfoById
     throw UnimplementedError();
   }

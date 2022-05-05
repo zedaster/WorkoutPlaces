@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class PlaceInfoScreen extends StatelessWidget {
+class SinglePlaceScreen extends StatelessWidget {
   final int placeId;
 
-  const PlaceInfoScreen({
+  const SinglePlaceScreen({
     Key? key,
     required this.placeId,
   }) : super(key: key);

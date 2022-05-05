@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:workout_places_app/domain/models/place/rating/general_rating.dart';
 import 'package:workout_places_app/domain/models/place/short_place_info.dart';
 
-class PlaceInfo extends ShortPlaceInfo {
+class FullPlaceInfo extends ShortPlaceInfo {
   final GeneralRating rating;
   final List<ImageProvider> images;
 
-  PlaceInfo({
+  FullPlaceInfo({
     required ShortPlaceInfo short,
     required this.rating,
     required this.images,

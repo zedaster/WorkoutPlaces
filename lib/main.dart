@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_places_app/data/fake_place_info_storage.dart';
-import 'package:workout_places_app/data/fake_workout_places_storage.dart';
-import 'package:workout_places_app/domain/repository/place_info_repository.dart';
+import 'package:workout_places_app/data/fake_single_place_storage.dart';
+import 'package:workout_places_app/data/fake_places_storage.dart';
+import 'package:workout_places_app/domain/repository/single_place_repository.dart';
 import 'package:workout_places_app/domain/repository/places_repository.dart';
 import 'package:workout_places_app/view/workout_app_scaffold.dart';
 
@@ -18,9 +18,9 @@ class WorkoutApp extends StatelessWidget {
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider<PlacesRepository>(
-            create: (context) => FakeWorkoutPlacesStorage()),
-        RepositoryProvider<PlaceInfoRepository>(
-            create: (context) => FakePlaceInfoStorage()),
+            create: (context) => FakePlacesStorage()),
+        RepositoryProvider<SinglePlaceRepository>(
+            create: (context) => FakeSinglePlaceStorage()),
       ],
       child: MaterialApp(
         title: 'Workout Places',

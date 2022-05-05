@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_places_app/bloc/places/places_cubit.dart';
 import 'package:workout_places_app/bloc/places/places_state.dart';
 import 'package:workout_places_app/domain/repository/places_repository.dart';
-import 'package:workout_places_app/view/place_info/place_info_screen.dart';
+import 'package:workout_places_app/view/single_place/single_place_screen.dart';
 
 import 'widgets/place_info_widget.dart';
 import 'widgets/places_change_mode_button.dart';
@@ -45,7 +45,7 @@ class WorkoutPlacesScreen extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) =>
-                                PlaceInfoScreen(placeId: state.places![i].id)));
+                                SinglePlaceScreen(placeId: state.places![i].id)));
                   },
                   locationName: state.places![i].locationName,
                   cityName: state.places![i].cityName,

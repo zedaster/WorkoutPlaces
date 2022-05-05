@@ -5,6 +5,7 @@ enum PlacesStatus {
   initial,
   loading,
   success,
+  // TODO: Create end page state
   //failed
 }
 
