@@ -23,7 +23,7 @@ class WorkoutPlacesScreen extends StatelessWidget {
           child: BlocConsumer<PlacesCubit, PlacesState>(
             listener: (context, state) {},
             builder: (context, state) {
-              if (state.status == PlacesStatus.initial ||
+              if (state.status == PlacesStatus.initializing ||
                   state.status == PlacesStatus.loading) {
                 return const Center(child: Text("Loading..."));
                 // TODO: Add loading animation

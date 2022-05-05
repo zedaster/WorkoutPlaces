@@ -6,17 +6,17 @@ import 'package:workout_places_app/domain/repository/places_repository.dart';
 import 'places_state.dart';
 
 class PlacesCubit extends Cubit<PlacesState> {
-  final PlacesRepository _placesRepository;
+  final PlacesRepository _repository;
 
   PlacesCubit(PlacesRepository repository)
-      : _placesRepository = repository,
+      : _repository = repository,
         super(PlacesState.initialState());
 
   Future<void> getMorePlaces() async {
     emit(state.copyWith(status: PlacesStatus.loading));
     var startId = state.places?.length ?? 0;
     const count = 10;
-    var newPlaces = await _placesRepository.getNearPlaces(
+    var newPlaces = await _repository.getNearPlaces(
         startId, count, state.deviceLocation);
     var newList = List.of(state.places ?? <ShortPlaceInfo>[]);
     newList.addAll(newPlaces);

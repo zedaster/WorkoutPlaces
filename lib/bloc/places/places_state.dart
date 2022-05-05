@@ -2,7 +2,7 @@ import 'package:workout_places_app/domain/models/location/map_location.dart';
 import 'package:workout_places_app/domain/models/place/short_place_info.dart';
 
 enum PlacesStatus {
-  initial,
+  initializing,
   loading,
   success,
   // TODO: Create end page state
@@ -22,7 +22,7 @@ class PlacesState {
 
   PlacesState.initialState()
       : places = null,
-        status = PlacesStatus.initial,
+        status = PlacesStatus.initializing,
         deviceLocation = MapLocation(0, 0);
 
   PlacesState copyWith({
