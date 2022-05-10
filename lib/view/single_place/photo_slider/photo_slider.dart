@@ -5,11 +5,24 @@ import 'package:photo_view/photo_view_gallery.dart';
 
 class PhotoSlider extends StatefulWidget {
   final List<ImageProvider> images;
+  final double? height;
+  final Function(int index, CarouselPageChangedReason reason)? onPageChanged;
 
-  const PhotoSlider({
-    Key? key,
-    required this.images,
-  }) : super(key: key);
+  const PhotoSlider(
+      {Key? key, required this.images, this.height, this.onPageChanged})
+      : super(key: key);
+
+  PhotoSlider copyWith({
+    List<ImageProvider>? images,
+    double? height,
+    Function(int index, CarouselPageChangedReason reason)? onPageChanged,
+  }) {
+    return PhotoSlider(
+      images: images ?? this.images,
+      height: height ?? this.height,
+      onPageChanged: onPageChanged ?? this.onPageChanged,
+    );
+  }
 
   @override
   _PhotoSliderState createState() => _PhotoSliderState();
@@ -28,12 +41,16 @@ class _PhotoSliderState extends State<PhotoSlider> {
             width: MediaQuery.of(context).size.width,
             child: Image(
               image: images[index],
-              fit: BoxFit.fitWidth,
+              fit: BoxFit.cover,
             ),
           ),
         );
       },
-      options: CarouselOptions(viewportFraction: 1),
+      options: CarouselOptions(
+        viewportFraction: 1,
+        height: widget.height,
+        onPageChanged: widget.onPageChanged,
+      ),
     );
   }
 
