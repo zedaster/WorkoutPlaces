@@ -9,7 +9,7 @@ import 'package:workout_places_app/domain/repository/single_place_repository.dar
 import 'package:workout_places_app/view/single_place/feature_container.dart';
 import 'package:workout_places_app/view/single_place/photo_slider/slider_dot_indicator_wrapper.dart';
 import 'package:workout_places_app/view/single_place/rating_box.dart';
-import 'package:workout_places_app/view/single_place/reviews/reviews_widget.dart';
+import 'package:workout_places_app/view/single_place/review_widgets/reviews_widget.dart';
 
 import 'photo_slider/photo_slider.dart';
 
@@ -140,7 +140,10 @@ class SinglePlaceScreen extends StatelessWidget {
                 if (!state.isReviewsLoaded)
                   const Text('Загрузка...')
                 else
-                  ReviewsWidget(reviews: state.reviews!)
+                  ReviewsWidget(
+                    short: place,
+                    reviews: state.reviews!,
+                  )
               ],
             );
           },
