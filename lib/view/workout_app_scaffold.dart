@@ -30,7 +30,7 @@ class _WorkoutScaffoldState extends State<WorkoutScaffold> {
         backgroundColor: Colors.white,
       ),
       body: _screens[_currentIndex],
-      backgroundColor: const Color(0xFFE5E5E5),
+      backgroundColor: Theme.of(context).backgroundColor,
       bottomNavigationBar: BottomNavigationBar(
         // Video about NavigationBar and changing pages https://www.youtube.com/watch?v=xoKqQjSDZ60
         // TODO: Experiment with types
