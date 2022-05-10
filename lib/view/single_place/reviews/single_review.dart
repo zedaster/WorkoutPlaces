@@ -1,11 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_places_app/domain/models/place/review/review.dart';
 
 class SingleReview extends StatelessWidget {
-  final int stars;
+  final Review review;
 
   const SingleReview({
-    required this.stars,
+    required this.review,
     Key? key,
   }) : super(key: key);
 
@@ -20,26 +21,26 @@ class SingleReview extends StatelessWidget {
             Container(
                 width: 50.0,
                 height: 50.0,
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: AssetImage("assets/images/workout-man.webp"),
+                      image: review.user.avatar,
                     ))),
             const SizedBox(width: 10),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Дмитрий Иванов",
-                  style: TextStyle(
+                 Text(
+                  review.user.showingName,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  "07.04.2022",
+                  review.stringDate,
                   style: TextStyle(
                     fontSize: 12,
                     color: Colors.black.withOpacity(0.5),
@@ -58,7 +59,7 @@ class SingleReview extends StatelessWidget {
             return Icon(
               Icons.star_rate,
               size: 24,
-              color: (i + 1 <= stars)
+              color: (i + 1 <= review.stars)
                   ? const Color(0xFFF1C40F)
                   : Theme.of(context).backgroundColor,
             );
@@ -68,10 +69,9 @@ class SingleReview extends StatelessWidget {
         const SizedBox(height: 10),
 
         // Text
-        const Text(
-          "Отличная площадка! Тренеруюсь на ней постоянно. Жаль, что "
-          "гантелей больше нет. Надеюсь, их скоро вернут.",
-          style: TextStyle(
+        Text(
+          review.text,
+          style: const TextStyle(
             fontSize: 16,
           ),
         )

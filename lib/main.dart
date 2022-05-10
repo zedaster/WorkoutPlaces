@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_places_app/data/fake_reviews_storage.dart';
 import 'package:workout_places_app/data/fake_single_place_storage.dart';
 import 'package:workout_places_app/data/fake_places_storage.dart';
+import 'package:workout_places_app/domain/repository/reviews_repository.dart';
 import 'package:workout_places_app/domain/repository/single_place_repository.dart';
 import 'package:workout_places_app/domain/repository/places_repository.dart';
 import 'package:workout_places_app/view/workout_app_scaffold.dart';
@@ -21,7 +23,10 @@ class WorkoutApp extends StatelessWidget {
             create: (context) => FakePlacesStorage()),
         RepositoryProvider<SinglePlaceRepository>(
             create: (context) => FakeSinglePlaceStorage()),
+        RepositoryProvider<ReviewsRepository>(
+            create: (context) => FakeReviewsStorage()),
       ],
+
       child: MaterialApp(
         title: 'Workout Places',
         theme: ThemeData(

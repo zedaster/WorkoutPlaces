@@ -1,9 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_places_app/domain/models/place/review/review.dart';
 import 'package:workout_places_app/view/single_place/reviews/single_review.dart';
 
 class ReviewsWidget extends StatelessWidget {
-  const ReviewsWidget({Key? key}) : super(key: key);
+  final List<Review> reviews;
+
+  const ReviewsWidget({Key? key, required this.reviews}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +16,7 @@ class ReviewsWidget extends StatelessWidget {
         ),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          // Title
           const Text("Отзывы",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -38,13 +42,25 @@ class ReviewsWidget extends StatelessWidget {
               ))),
 
           const SizedBox(height: 20),
+
           // User reviews
-          Wrap(
-            runSpacing: 20,
-            children: Iterable.generate(2).map((i) {
-              return const SingleReview(stars: 4);
-            }).toList(),
-          ),
+          if (reviews.isNotEmpty)
+            Wrap(
+              runSpacing: 20,
+              children: reviews.map((review) {
+                return SingleReview(review: review);
+              }).toList(),
+            )
+          else
+            const Padding(
+              padding: EdgeInsets.only(bottom: 10),
+              child: Text(
+                "Здесь пока нет отзывов. Вы можете быть первым!",
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+            ),
         ]));
   }
 }

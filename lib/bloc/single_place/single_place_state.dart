@@ -1,33 +1,52 @@
 import 'package:workout_places_app/domain/models/place/full_place_info.dart';
+import 'package:workout_places_app/domain/models/place/review/review.dart';
 
-enum SinglePlaceStatus {
+enum SinglePlaceInfoStatus {
   initializing,
   success,
   // failed
 }
 
+enum SinglePlaceReviewsStatus {
+  initializing,
+  success,
+  // TODO: Add sub-loading and page-end status
+}
+
 class SinglePlaceState {
-  final SinglePlaceStatus status;
+  final SinglePlaceInfoStatus infoStatus;
+  final SinglePlaceReviewsStatus reviewsStatus;
   final FullPlaceInfo? place;
+  final List<Review>? reviews;
 
   SinglePlaceState({
-    required this.status,
+    required this.infoStatus,
+    required this.reviewsStatus,
     this.place,
+    this.reviews,
   });
 
   SinglePlaceState.initialState()
-      : status = SinglePlaceStatus.initializing,
-        place = null;
+      : infoStatus = SinglePlaceInfoStatus.initializing,
+        reviewsStatus = SinglePlaceReviewsStatus.initializing,
+        place = null,
+        reviews = null;
 
-  bool get isLoaded => status != SinglePlaceStatus.initializing;
+  bool get isInfoLoaded => infoStatus != SinglePlaceInfoStatus.initializing;
 
-  SinglePlaceState copyWith({
-    SinglePlaceStatus? status,
-    FullPlaceInfo? place,
-  }) {
+  bool get isReviewsLoaded =>
+      reviewsStatus != SinglePlaceReviewsStatus.initializing;
+
+  SinglePlaceState copyWith(
+      {SinglePlaceInfoStatus? infoStatus,
+      SinglePlaceReviewsStatus? reviewsStatus,
+      FullPlaceInfo? place,
+      List<Review>? reviews}) {
     return SinglePlaceState(
-      status: status ?? this.status,
-      place: place ?? this.place
+      infoStatus: infoStatus ?? this.infoStatus,
+      reviewsStatus: reviewsStatus ?? this.reviewsStatus,
+      place: place ?? this.place,
+      reviews: reviews ?? this.reviews,
     );
   }
 }
