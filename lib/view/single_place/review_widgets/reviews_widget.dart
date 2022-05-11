@@ -37,7 +37,9 @@ class ReviewsWidget extends StatelessWidget {
             onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => EditReviewScreen(short: short))),
+                    builder: (context) => EditReviewScreen(
+                          short: short,
+                        ))),
             child: Container(
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 decoration: BoxDecoration(
@@ -61,7 +63,7 @@ class ReviewsWidget extends StatelessWidget {
           if (reviews.isNotEmpty)
             Wrap(
               runSpacing: 20,
-              children: reviews.map((review) {
+              children: reviews.map<Widget>((review) {
                 return SingleReview(review: review);
               }).toList(),
             )

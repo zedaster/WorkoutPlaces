@@ -1,3 +1,4 @@
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_places_app/domain/models/place/short_place_info.dart';
 import 'package:workout_places_app/domain/repository/reviews_repository.dart';
@@ -12,13 +13,17 @@ class SinglePlaceCubit extends Cubit<SinglePlaceState> {
   SinglePlaceCubit(this.placeRepository, this.reviewsRepository)
       : super(SinglePlaceState.initialState());
 
-  Future<void> initialize(ShortPlaceInfo short) async {
+  void initialize(ShortPlaceInfo short) {
     // Initialize short info
+    emit(SinglePlaceState.initialState());
     placeRepository.getFullInfo(short).then((fullInfo) {
-      emit(state.copyWith(
-        infoStatus: SinglePlaceInfoStatus.success,
-        place: fullInfo,
-      ));
+      reviewsRepository.getAverageRating(fullInfo.id).then((rating) {
+        emit(state.copyWith(
+          infoStatus: SinglePlaceInfoStatus.success,
+          averageRating: rating,
+          place: fullInfo,
+        ));
+      });
     });
 
     // Initialize reviews
@@ -27,6 +32,19 @@ class SinglePlaceCubit extends Cubit<SinglePlaceState> {
         reviews: reviews,
         reviewsStatus: SinglePlaceReviewsStatus.success,
       ));
+    });
+  }
+
+  void updateReviews() {
+    if (state.place == null) return;
+    reviewsRepository.getReviews(state.place!.id, 0, 10).then((reviews) {
+      reviewsRepository.getAverageRating(state.place!.id).then((rating) {
+        emit(state.copyWith(
+          averageRating: rating,
+          reviews: reviews,
+          reviewsStatus: SinglePlaceReviewsStatus.success,
+        ));
+      });
     });
   }
 }

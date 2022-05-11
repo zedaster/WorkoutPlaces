@@ -1,5 +1,5 @@
 import 'package:workout_places_app/domain/models/location/map_location.dart';
-import 'package:workout_places_app/domain/models/place/short_place_info.dart';
+import 'package:workout_places_app/domain/models/place/rated_place_info.dart';
 
 enum PlacesStatus {
   initializing,
@@ -11,7 +11,7 @@ enum PlacesStatus {
 
 class PlacesState {
   final PlacesStatus status;
-  final List<ShortPlaceInfo>? places;
+  final List<RatedPlaceInfo>? places;
   final MapLocation deviceLocation;
 
   PlacesState({
@@ -27,7 +27,7 @@ class PlacesState {
 
   PlacesState copyWith({
     PlacesStatus? status,
-    List<ShortPlaceInfo>? places,
+    List<RatedPlaceInfo>? places,
     MapLocation? deviceLocation,
   }) {
     return PlacesState(

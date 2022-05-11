@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:workout_places_app/domain/models/place/review/review_data.dart';
 import 'package:workout_places_app/domain/models/user/user.dart';
 
 class Review {
@@ -25,6 +26,15 @@ class Review {
       date: date,
       stars: stars ?? this.stars,
       text: text ?? this.text,
+    );
+  }
+
+  Review copyWithData(ReviewData data) {
+    return Review(
+      user: user,
+      date: date,
+      stars: data.stars,
+      text: data.text,
     );
   }
 }

@@ -12,7 +12,9 @@ class RatingBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-          color: const Color(0xFF27AE60),
+          color: (rating == 0)
+              ? Theme.of(context).backgroundColor
+              : const Color(0xFF27AE60),
           borderRadius: BorderRadius.circular(5),
         ),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),

@@ -11,7 +11,6 @@ class ShortPlaceInfo {
   final ImageProvider mainImage;
   final String cityName;
   final String locationName;
-  final double averageRating;
   final MapLocation location;
   final double distance;
 
@@ -22,7 +21,6 @@ class ShortPlaceInfo {
     required this.mainImage,
     required this.cityName,
     required this.locationName,
-    required this.averageRating,
     required this.location,
     required this.distance,
   });

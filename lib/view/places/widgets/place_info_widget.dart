@@ -56,8 +56,8 @@ class PlaceInfoWidget extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 8, bottom: 2),
                       child: Row(
                         children: [
-                          const Icon(Icons.star,
-                              color: Color(0xFF00EB00), size: 20),
+                          Icon(Icons.star,
+                              color: (rating == 0) ? Theme.of(context).backgroundColor : const Color(0xFF00EB00), size: 20),
                           const SizedBox(width: 2),
                           Text(rating.toStringAsFixed(1),
                               style: const TextStyle(

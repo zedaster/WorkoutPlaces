@@ -18,35 +18,41 @@ class SinglePlaceState {
   final SinglePlaceReviewsStatus reviewsStatus;
   final FullPlaceInfo? place;
   final List<Review>? reviews;
+  final double? averageRating;
 
   SinglePlaceState({
     required this.infoStatus,
     required this.reviewsStatus,
     this.place,
     this.reviews,
+    this.averageRating,
   });
 
   SinglePlaceState.initialState()
       : infoStatus = SinglePlaceInfoStatus.initializing,
         reviewsStatus = SinglePlaceReviewsStatus.initializing,
         place = null,
-        reviews = null;
+        reviews = null,
+        averageRating = null;
 
   bool get isInfoLoaded => infoStatus != SinglePlaceInfoStatus.initializing;
 
   bool get isReviewsLoaded =>
       reviewsStatus != SinglePlaceReviewsStatus.initializing;
 
-  SinglePlaceState copyWith(
-      {SinglePlaceInfoStatus? infoStatus,
-      SinglePlaceReviewsStatus? reviewsStatus,
-      FullPlaceInfo? place,
-      List<Review>? reviews}) {
+  SinglePlaceState copyWith({
+    SinglePlaceInfoStatus? infoStatus,
+    SinglePlaceReviewsStatus? reviewsStatus,
+    FullPlaceInfo? place,
+    List<Review>? reviews,
+    double? averageRating,
+  }) {
     return SinglePlaceState(
       infoStatus: infoStatus ?? this.infoStatus,
       reviewsStatus: reviewsStatus ?? this.reviewsStatus,
       place: place ?? this.place,
       reviews: reviews ?? this.reviews,
+      averageRating: averageRating ?? this.averageRating
     );
   }
 }
