@@ -44,7 +44,7 @@ class _WorkoutScaffoldState extends State<WorkoutScaffold> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.list), label: "Площадки"),
           BottomNavigationBarItem(icon: Icon(Icons.star), label: "Избранное"),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Профиль")
+          BottomNavigationBarItem(icon: Icon(Icons.manage_accounts), label: "Профиль")
         ],
       ),
     );
