@@ -6,8 +6,16 @@ abstract class SinglePlaceRepository {
   Future<FullPlaceInfo> getFullInfo(ShortPlaceInfo short);
 }
 
-class WrongPlaceIdException implements Exception {
+abstract class SinglePlaceException implements Exception {
   final int placeId;
 
-  WrongPlaceIdException(this.placeId);
+  SinglePlaceException(this.placeId);
+}
+
+class WrongPlaceIdException extends SinglePlaceException {
+  WrongPlaceIdException(int placeId) : super(placeId);
+}
+
+class SinglePlaceNetworkException extends SinglePlaceException {
+  SinglePlaceNetworkException(int placeId) : super(placeId);
 }
