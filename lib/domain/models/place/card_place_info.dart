@@ -1,12 +1,13 @@
 import 'package:workout_places_app/domain/models/place/short_place_info.dart';
 
-class RatedPlaceInfo extends ShortPlaceInfo {
-  final double rating;
-  final ShortPlaceInfo short;
+class CardPlaceInfo extends ShortPlaceInfo {
+  double rating;
+  double? distance;
 
-  RatedPlaceInfo({
-    required this.short,
+  CardPlaceInfo({
+    required ShortPlaceInfo short,
     required this.rating,
+    required this.distance,
   }) : super(
     id: short.id,
     size: short.size,
@@ -15,10 +16,5 @@ class RatedPlaceInfo extends ShortPlaceInfo {
     cityName: short.cityName,
     locationName: short.locationName,
     location: short.location,
-    distance: short.distance,
   );
-  
-  copyWithRating(double rating) {
-    return RatedPlaceInfo(short: short, rating: rating);
-  }
 }

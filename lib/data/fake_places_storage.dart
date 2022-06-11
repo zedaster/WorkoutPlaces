@@ -18,7 +18,6 @@ class FakePlacesStorage implements PlacesRepository {
         cityName: "Екатеринбург",
         locationName: "Бориса Ельцина",
         location: MapLocation(56.846220, 60.590296),
-        distance: 400,
       ),
       ShortPlaceInfo(
         id: 2,
@@ -28,7 +27,6 @@ class FakePlacesStorage implements PlacesRepository {
         cityName: "Екатеринбург",
         locationName: "Антона Валека",
         location: MapLocation(56.839925, 60.592627),
-        distance: 700,
       ),
       ShortPlaceInfo(
         id: 3,
@@ -38,8 +36,19 @@ class FakePlacesStorage implements PlacesRepository {
         cityName: "Екатеринбург",
         locationName: "Парк Динамо",
         location: MapLocation(56.845337, 60.601613),
-        distance: 1000,
       ),
     ];
+  }
+
+  @override
+  Future<List<ShortPlaceInfo>> getAllPlaces(int skip, int count) {
+    // TODO: implement getAllPlaces
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<ShortPlaceInfo>> getMapPlaces(int skip, MapLocation topLeft, MapLocation bottomRight) {
+    // TODO: implement getMapPlaces
+    throw UnimplementedError();
   }
 }

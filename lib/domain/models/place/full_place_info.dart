@@ -15,6 +15,5 @@ class FullPlaceInfo extends ShortPlaceInfo {
           cityName: short.cityName,
           locationName: short.locationName,
           location: short.location,
-          distance: short.distance,
         );
 }

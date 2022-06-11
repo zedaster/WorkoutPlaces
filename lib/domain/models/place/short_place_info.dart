@@ -12,7 +12,6 @@ class ShortPlaceInfo {
   final String cityName;
   final String locationName;
   final MapLocation location;
-  final double distance;
 
   ShortPlaceInfo({
     required this.id,
@@ -22,6 +21,5 @@ class ShortPlaceInfo {
     required this.cityName,
     required this.locationName,
     required this.location,
-    required this.distance,
   });
 }
