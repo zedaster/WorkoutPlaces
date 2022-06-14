@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:workout_places_app/bloc/favorites/favorites_cubit.dart';
 import 'package:workout_places_app/bloc/places/places_cubit.dart';
 import 'package:workout_places_app/bloc/places/places_state.dart';
+import 'package:workout_places_app/domain/repository/favorites_repository.dart';
+import 'package:workout_places_app/view/navigator_screen.dart';
 import 'package:workout_places_app/view/single_place/single_place_screen.dart';
 
 import 'widgets/place_info_widget.dart';
 import 'widgets/places_change_mode_button.dart';
 import 'widgets/places_mode.dart';
 
-class WorkoutPlacesScreen extends StatelessWidget {
+class WorkoutPlacesScreen extends StatelessWidget implements NavigatorScreen {
   const WorkoutPlacesScreen({Key? key}) : super(key: key);
+
+  @override
+  String get appBarTitle => "Площадки";
+
+  @override
+  Widget get asWidget => this;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +58,12 @@ class WorkoutPlacesScreen extends StatelessWidget {
                 size: state.places![i].size,
                 novelty: state.places![i].novelty,
                 rating: state.places![i].rating,
-                distance: state.places![i].distance.round(),
+                distance: state.places![i].distance?.round(),
+                isFavorite: state.places![i].isFavorite,
+                onFavoriteTap: (newStatus) {
+                  print("On tap with newStatus $newStatus");
+                  context.read<PlacesCubit>().onFavoriteStatusChanged(state.places![i].id, newStatus);
+                },
               ),
             );
           },

@@ -19,6 +19,7 @@ class PlacesListScreenPart extends StatelessWidget {
       shrinkWrap: true,
       itemCount: 10,
       itemBuilder: (ctx, i) => PlaceInfoWidget(
+        // TODO: Add favorites params
         onTap: () {
           //Navigator.push(context, MaterialPageRoute(builder: (context) => PlaceInfoScreen(placeId: placeId)))
         },
@@ -30,6 +31,10 @@ class PlacesListScreenPart extends StatelessWidget {
         novelty: WorkoutNovelty.modern,
         //distance: 300,
         rating: 5.0,
+        isFavorite: false,
+        onFavoriteTap: (newStatus) {
+          // TODO: Add bloc here
+        },
       ),
     );
   }

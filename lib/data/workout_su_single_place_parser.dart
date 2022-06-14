@@ -46,7 +46,6 @@ class WorkoutSuSinglePlaceParser implements SinglePlaceRepository {
       cityName: cityName,
       locationName: locationName,
       location: _parseLocation(document),
-      distance: 400,
     );
     return FullPlaceInfo(short: short, images: allImages.skip(1).toList());
   }

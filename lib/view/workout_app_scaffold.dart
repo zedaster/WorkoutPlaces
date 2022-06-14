@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:workout_places_app/view/favorites/favorites_screen.dart';
+import 'package:workout_places_app/view/navigator_screen.dart';
+import 'package:workout_places_app/view/profile/profile_screen.dart';
 
 import 'places/workout_places_screen.dart';
 
@@ -11,25 +14,24 @@ class WorkoutScaffold extends StatefulWidget {
 
 class _WorkoutScaffoldState extends State<WorkoutScaffold> {
   // TODO: create navigation page interface with appbar getters
-  // TODO: change to screen class instances
   int _currentIndex = 0;
-  final _screens = [
+  final _screens = <NavigatorScreen>[
     const WorkoutPlacesScreen(),
-    const Center(child: Text("Favourites Page")),
-    const Center(child: Text("Profile and Settings Page")),
+    const FavoritesScreen(),
+    const ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          "Площадки",
-          style: TextStyle(color: Colors.black),
+        title: Text(
+          _screens[_currentIndex].appBarTitle,
+          style: const TextStyle(color: Colors.black),
         ),
         backgroundColor: Colors.white,
       ),
-      body: _screens[_currentIndex],
+      body: _screens[_currentIndex].asWidget,
       backgroundColor: Theme.of(context).backgroundColor,
       bottomNavigationBar: BottomNavigationBar(
         // Video about NavigationBar and changing pages https://www.youtube.com/watch?v=xoKqQjSDZ60

@@ -87,7 +87,8 @@ class EditReviewBloc extends Bloc<EditReviewEvent, EditReviewState> {
             sendStatus: SendStatus.sent,
           ));
           singlePlaceCubit.updateReviews();
-          placesCubit.updateRating(state.short!.id);
+          // TODO: Create event system for rating repository
+          //placesCubit.updateRating(state.short!.id);
           return;
         case ReviewEditStatus.noAccess:
           emit(state.copyWith(
