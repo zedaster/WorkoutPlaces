@@ -1,8 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_places_app/bloc/edit_review/edit_review_event.dart';
 import 'package:workout_places_app/bloc/edit_review/edit_review_state.dart';
-import 'package:workout_places_app/bloc/places/places_cubit.dart';
-import 'package:workout_places_app/bloc/single_place/single_place_cubit.dart';
 import 'package:workout_places_app/domain/models/place/review/review_data.dart';
 import 'package:workout_places_app/domain/models/user/user.dart';
 import 'package:workout_places_app/domain/repository/reviews_repository.dart';
@@ -10,13 +8,9 @@ import 'package:workout_places_app/domain/structure/review_edit_status.dart';
 
 class EditReviewBloc extends Bloc<EditReviewEvent, EditReviewState> {
   final ReviewsRepository reviewsRepository;
-  final SinglePlaceCubit singlePlaceCubit;
-  final PlacesCubit placesCubit;
 
   EditReviewBloc({
     required this.reviewsRepository,
-    required this.singlePlaceCubit,
-    required this.placesCubit
     // TODO: Replace this id
   }) : super(EditReviewState.initial(User.empty().id)) {
     on<InitializeReviewEvent>(_onInit);
@@ -86,9 +80,6 @@ class EditReviewBloc extends Bloc<EditReviewEvent, EditReviewState> {
             selectedStars: event.newStars,
             sendStatus: SendStatus.sent,
           ));
-          singlePlaceCubit.updateReviews();
-          // TODO: Create event system for rating repository
-          //placesCubit.updateRating(state.short!.id);
           return;
         case ReviewEditStatus.noAccess:
           emit(state.copyWith(

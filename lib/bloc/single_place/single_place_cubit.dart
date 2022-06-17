@@ -33,9 +33,12 @@ class SinglePlaceCubit extends Cubit<SinglePlaceState> {
         reviewsStatus: SinglePlaceReviewsStatus.success,
       ));
     });
+
+    reviewsRepository.addAverageRatingUpdateListener((update) => _updateReviews());
+    reviewsRepository.addUserReviewUpdateListener((update) => _updateReviews());
   }
 
-  void updateReviews() {
+  Future<void> _updateReviews() async {
     if (state.place == null) return;
     reviewsRepository.getReviews(state.place!.id, 0, 10).then((reviews) {
       reviewsRepository.getAverageRating(state.place!.id).then((rating) {

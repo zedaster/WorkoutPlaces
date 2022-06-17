@@ -62,8 +62,6 @@ class WorkoutApp extends StatelessWidget {
           BlocProvider(
               create: (context) => EditReviewBloc(
                     reviewsRepository: context.read<ReviewsRepository>(),
-                    singlePlaceCubit: context.read<SinglePlaceCubit>(),
-                    placesCubit: context.read<PlacesCubit>(),
                   )),
         ],
         child: MaterialApp(

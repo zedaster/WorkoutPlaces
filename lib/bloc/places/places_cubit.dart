@@ -4,6 +4,7 @@ import 'package:workout_places_app/domain/repository/favorites_repository.dart';
 import 'package:workout_places_app/domain/repository/places_repository.dart';
 import 'package:workout_places_app/domain/repository/reviews_repository.dart';
 import 'package:workout_places_app/domain/repository/user_location_repository.dart';
+import 'package:workout_places_app/domain/structure/average_rating_update.dart';
 import 'package:workout_places_app/domain/structure/favorite_update.dart';
 
 import 'places_state.dart';
@@ -26,6 +27,8 @@ class PlacesCubit extends Cubit<PlacesState> {
     _internalGetMorePlaces();
     favoritesRepository
         .addFavoriteUpdateListener((update) => _handleFavoriteUpdate(update));
+    reviewsRepository.addAverageRatingUpdateListener(
+        (update) => _handleRatingUpdate(update));
   }
 
   void getMorePlaces() {
@@ -92,5 +95,20 @@ class PlacesCubit extends Cubit<PlacesState> {
 
   Future<void> _handleFavoriteUpdate(FavoriteUpdate update) async {
     onFavoriteStatusChanged(update.place.id, update.isFavoriteNow);
+  }
+
+  Future<void> _handleRatingUpdate(AverageRatingUpdate update) async {
+    emit(state.copyWith(status: PlacesStatus.loading));
+
+    var updatedIndex =
+        state.places!.indexWhere((place) => place.id == update.placeId);
+    var newPlaces = List.of(state.places!);
+
+    if (updatedIndex != -1) {
+      newPlaces[updatedIndex] =
+          newPlaces[updatedIndex].copyWith(rating: update.newRating);
+    }
+
+    emit(state.copyWith(status: PlacesStatus.success, places: newPlaces));
   }
 }

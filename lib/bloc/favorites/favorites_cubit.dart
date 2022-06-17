@@ -5,6 +5,7 @@ import 'package:workout_places_app/domain/models/place/short_place_info.dart';
 import 'package:workout_places_app/domain/repository/favorites_repository.dart';
 import 'package:workout_places_app/domain/repository/reviews_repository.dart';
 import 'package:workout_places_app/domain/repository/user_location_repository.dart';
+import 'package:workout_places_app/domain/structure/average_rating_update.dart';
 import 'package:workout_places_app/domain/structure/favorite_update.dart';
 
 import 'favorites_state.dart';
@@ -14,24 +15,28 @@ class FavoritesCubit extends Cubit<FavoritesState> {
   final ReviewsRepository reviewsRepository;
   final UserLocationRepository userLocationRepository;
 
-  FavoritesCubit(this.favoritesRepository,
-      this.reviewsRepository,
-      this.userLocationRepository,) : super(FavoritesState.initialState());
+  FavoritesCubit(
+    this.favoritesRepository,
+    this.reviewsRepository,
+    this.userLocationRepository,
+  ) : super(FavoritesState.initialState());
 
   void initialize() {
     if (state.status != FavoritesStatus.initializing) return;
     _getPlaces().toList().then((places) {
       emit(state.copyWith(places: places, status: FavoritesStatus.success));
     });
-    favoritesRepository.addFavoriteUpdateListener((update) =>
-        _updatePlace(update));
+    favoritesRepository
+        .addFavoriteUpdateListener((update) => _handlePlaceUpdate(update));
+    reviewsRepository
+        .addAverageRatingUpdateListener((update) => _handleRatingUpdate(update));
   }
 
-  Future<void> _updatePlace(FavoriteUpdate update) async {
+  Future<void> _handlePlaceUpdate(FavoriteUpdate update) async {
     emit(state.copyWith(status: FavoritesStatus.updating));
 
-    var updatedIndex = state.places!.indexWhere((place) =>
-    place.id == update.place.id);
+    var updatedIndex =
+        state.places!.indexWhere((place) => place.id == update.place.id);
     var newPlaces = List.of(state.places!);
 
     if (!update.isFavoriteNow) {
@@ -42,6 +47,20 @@ class FavoritesCubit extends Cubit<FavoritesState> {
       var userLoc = await userLocationRepository.getUserLocation();
       var card = await _transferShortToCardInfo(update.place, userLoc);
       newPlaces.add(card);
+    }
+
+    emit(state.copyWith(status: FavoritesStatus.success, places: newPlaces));
+  }
+
+  Future<void> _handleRatingUpdate(AverageRatingUpdate update) async {
+    emit(state.copyWith(status: FavoritesStatus.updating));
+
+    var updatedIndex =
+    state.places!.indexWhere((place) => place.id == update.placeId);
+    var newPlaces = List.of(state.places!);
+
+    if (updatedIndex != -1) {
+      newPlaces[updatedIndex] = newPlaces[updatedIndex].copyWith(rating: update.newRating);
     }
 
     emit(state.copyWith(status: FavoritesStatus.success, places: newPlaces));
@@ -60,8 +79,8 @@ class FavoritesCubit extends Cubit<FavoritesState> {
     }
   }
 
-  Future<CardPlaceInfo> _transferShortToCardInfo(ShortPlaceInfo short,
-      MapLocation? userLocation) async {
+  Future<CardPlaceInfo> _transferShortToCardInfo(
+      ShortPlaceInfo short, MapLocation? userLocation) async {
     var rating = await reviewsRepository.getAverageRating(short.id);
     var distance = userLocation?.distanceTo(short.location);
     return CardPlaceInfo(
