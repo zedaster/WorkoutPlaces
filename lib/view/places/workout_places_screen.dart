@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:workout_places_app/bloc/favorites/favorites_cubit.dart';
 import 'package:workout_places_app/bloc/places/places_cubit.dart';
 import 'package:workout_places_app/bloc/places/places_state.dart';
-import 'package:workout_places_app/domain/repository/favorites_repository.dart';
 import 'package:workout_places_app/view/navigator_screen.dart';
 import 'package:workout_places_app/view/single_place/single_place_screen.dart';
 
 import 'widgets/place_info_widget.dart';
-import 'widgets/places_change_mode_button.dart';
-import 'widgets/places_mode.dart';
 
 class WorkoutPlacesScreen extends StatelessWidget implements NavigatorScreen {
   const WorkoutPlacesScreen({Key? key}) : super(key: key);
@@ -30,7 +26,7 @@ class WorkoutPlacesScreen extends StatelessWidget implements NavigatorScreen {
           builder: (context, state) {
             if (state.status == PlacesStatus.initializing ||
                 state.status == PlacesStatus.loading) {
-              return const Center(child: Text("Loading..."));
+              return const Center(child: CircularProgressIndicator(color: Color(0xFF27AE60),));
               // TODO: Add loading animation
             }
             // TODO: Show loading status and remove loading condition above
@@ -61,20 +57,19 @@ class WorkoutPlacesScreen extends StatelessWidget implements NavigatorScreen {
                 distance: state.places![i].distance?.round(),
                 isFavorite: state.places![i].isFavorite,
                 onFavoriteTap: (newStatus) {
-                  print("On tap with newStatus $newStatus");
                   context.read<PlacesCubit>().onFavoriteStatusChanged(state.places![i].id, newStatus);
                 },
               ),
             );
           },
         ),
-        const Align(
-          alignment: Alignment.bottomCenter,
-          child: Padding(
-            padding: EdgeInsets.only(bottom: 20),
-            child: PlacesChangeModeButton(modeToChange: PlacesMode.MAP),
-          ),
-        )
+        // const Align(
+        //   alignment: Alignment.bottomCenter,
+        //   child: Padding(
+        //     padding: EdgeInsets.only(bottom: 20),
+        //     child: PlacesChangeModeButton(modeToChange: PlacesMode.MAP),
+        //   ),
+        // )
       ],
     );
   }

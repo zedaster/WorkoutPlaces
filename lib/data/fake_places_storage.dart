@@ -47,7 +47,7 @@ class FakePlacesStorage implements PlacesRepository {
   }
 
   @override
-  Future<List<ShortPlaceInfo>> getMapPlaces(int skip, MapLocation topLeft, MapLocation bottomRight) {
+  Future<List<ShortPlaceInfo>> getMapPlaces(MapLocation topLeft, MapLocation bottomRight) {
     // TODO: implement getMapPlaces
     throw UnimplementedError();
   }

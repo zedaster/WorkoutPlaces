@@ -47,7 +47,7 @@ class WorkoutSuSinglePlaceParser implements SinglePlaceRepository {
       locationName: locationName,
       location: _parseLocation(document),
     );
-    return FullPlaceInfo(short: short, images: allImages.skip(1).toList());
+    return FullPlaceInfo(short: short, allImages: allImages);
   }
 
   WorkoutSize _parseSize(String textSize) {
@@ -74,16 +74,22 @@ class WorkoutSuSinglePlaceParser implements SinglePlaceRepository {
   }
 
   List<ImageProvider> _parseAllImages(Document document) {
-    return document.getElementsByClassName("photo-list-fancybox")
+    var localUrlRegex = RegExp("uploads.+");
+    return document
+        .getElementsByClassName("photo-list-fancybox")
         .map((elem) => elem.getElementsByTagName("img").first)
         .map((imgElem) => imgElem.attributes["src"]!)
+        .map((localThumbUrl) =>
+            localUrlRegex.firstMatch(localThumbUrl)!.group(0))
+        .map((localUrl) => "https://workout.su/$localUrl")
         .map((url) => NetworkImage(url))
         .toList();
   }
 
   MapLocation _parseLocation(Document document) {
     final regex = RegExp(r'"lat":"([0-9]+\.[0-9]+)","lng":"([0-9]+\.[0-9]+)"');
-    var mapScriptContents = document.getElementsByTagName("script")
+    var mapScriptContents = document
+        .getElementsByTagName("script")
         .where((element) => regex.hasMatch(element.text))
         .first
         .text;

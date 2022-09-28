@@ -32,14 +32,14 @@ class SinglePlaceScreen extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           if (!state.isInfoLoaded) {
-            return const Text('Loading...');
+            return const Center(child: CircularProgressIndicator(color: Color(0xFF27AE60),));
           }
           var place = state.place!;
           return ListView(
             children: [
               SliderDotIndicatorWrapper(
                 slider: PhotoSlider(
-                  images: place.images,
+                  images: place.allImages,
                   height: 300,
                 ),
               ),

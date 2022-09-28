@@ -32,4 +32,15 @@ class MapLocation {
   double _degreesToRadians(double degrees) {
     return degrees * (math.pi / 180);
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MapLocation &&
+          runtimeType == other.runtimeType &&
+          latitude == other.latitude &&
+          longitude == other.longitude;
+
+  @override
+  int get hashCode => latitude.hashCode ^ longitude.hashCode;
 }

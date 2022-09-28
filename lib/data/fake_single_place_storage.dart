@@ -11,7 +11,7 @@ class FakeSinglePlaceStorage implements SinglePlaceRepository {
       case 1:
         return FullPlaceInfo(
           short: short,
-          images: [
+          allImages: [
             short.mainImage,
             const NetworkImage(
                 "https://workout.su/uploads/userfiles/2021/09/2021-09-01-08-09-32-g4e.jpg"),
@@ -22,7 +22,7 @@ class FakeSinglePlaceStorage implements SinglePlaceRepository {
       case 2:
         return FullPlaceInfo(
           short: short,
-          images: [
+          allImages: [
             short.mainImage,
             const NetworkImage(
                 "https://workout.su/uploads/userfiles/2021/09/2021-09-02-15-09-49-rgz.jpg"),
@@ -35,7 +35,7 @@ class FakeSinglePlaceStorage implements SinglePlaceRepository {
       case 3:
         return FullPlaceInfo(
           short: short,
-          images: [
+          allImages: [
             short.mainImage,
             const NetworkImage(
                 "https://workout.su/uploads/userfiles/2021/07/2021-07-25-13-07-02-8bq.jpeg"),

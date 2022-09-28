@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "39828393868",
+    "firebase_url": "https://workoutapp-b162e-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "workoutapp-b162e",
+    "storage_bucket": "workoutapp-b162e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39828393868:android:ef6a62074d8ea33b7050a9",
+        "android_client_info": {
+          "package_name": "com.nomadystudio.workout_places_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39828393868-j78ijh02meefnbcg5v799bnukvnumht8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQCGOR_HidVXp81i8piCYrIdnznf6FeKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39828393868-j78ijh02meefnbcg5v799bnukvnumht8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

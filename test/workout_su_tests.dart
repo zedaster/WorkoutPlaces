@@ -21,7 +21,7 @@ void main() {
       expect(fullPlaceInfo.locationName, "Проспект Ленина 85");
       expect(fullPlaceInfo.location.latitude, 56.843124);
       expect(fullPlaceInfo.location.longitude, 60.633194);
-      expect(fullPlaceInfo.images.length, 12);
+      expect(fullPlaceInfo.allImages.length, 12);
     });
   });
 }

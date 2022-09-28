@@ -1,13 +1,16 @@
+import 'dart:io';
+
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_places_app/bloc/edit_review/edit_review_bloc.dart';
 import 'package:workout_places_app/bloc/favorites/favorites_cubit.dart';
 import 'package:workout_places_app/bloc/places/places_cubit.dart';
-import 'package:workout_places_app/data/fake_places_storage.dart';
 import 'package:workout_places_app/data/fake_reviews_storage.dart';
-import 'package:workout_places_app/data/fake_single_place_storage.dart';
 import 'package:workout_places_app/data/geolocator_adapter.dart';
+import 'package:workout_places_app/data/local_places_storage.dart';
 import 'package:workout_places_app/data/temp_favorites_storage.dart';
+import 'package:workout_places_app/data/workout_su_single_place_parser.dart';
 import 'package:workout_places_app/domain/repository/places_repository.dart';
 import 'package:workout_places_app/domain/repository/reviews_repository.dart';
 import 'package:workout_places_app/domain/repository/single_place_repository.dart';
@@ -17,7 +20,9 @@ import 'bloc/single_place/single_place_cubit.dart';
 import 'domain/repository/favorites_repository.dart';
 import 'domain/repository/user_location_repository.dart';
 
+// TODO: Create run mode
 void main() {
+  HttpOverrides.global = IgnoreCertificateHttpOverrides();
   runApp(const WorkoutApp());
 }
 
@@ -26,12 +31,16 @@ class WorkoutApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Call this function when Firebase is needed
+    // _initFirebase();
     return MultiRepositoryProvider(
       providers: [
-        RepositoryProvider<PlacesRepository>(
-            create: (context) => FakePlacesStorage()),
         RepositoryProvider<SinglePlaceRepository>(
-            create: (context) => FakeSinglePlaceStorage()),
+            create: (context) => WorkoutSuSinglePlaceParser()),
+        RepositoryProvider<PlacesRepository>(
+            create: (context) => LocalPlacesStorage(
+                  context.read<SinglePlaceRepository>(),
+                )),
         RepositoryProvider<ReviewsRepository>(
             create: (context) => FakeReviewsStorage()),
         RepositoryProvider<UserLocationRepository>(
@@ -78,5 +87,19 @@ class WorkoutApp extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _initFirebase() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
+  }
+}
+
+class IgnoreCertificateHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host,
+          int port) => true;
   }
 }

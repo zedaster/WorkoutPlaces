@@ -106,23 +106,26 @@ class PlaceInfoWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text("$locationName, $cityName",
-                                    style: const TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold)),
-                                const SizedBox(height: 1),
-                                PlaceFeaturesText(novelty: novelty, size: size)
-                              ],
+                            Flexible(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text("$locationName, $cityName",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold)),
+                                  const SizedBox(height: 1),
+                                  PlaceFeaturesText(novelty: novelty, size: size)
+                                ],
+                              ),
                             ),
                             if (distance != null)
                               Column(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Text("$distance м",
+                                  Text(stringfyDistance(distance!),
                                       style: const TextStyle(
                                         fontSize: 12,
                                       ))
@@ -138,5 +141,13 @@ class PlaceInfoWidget extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String stringfyDistance(int metersDistance) {
+    if (metersDistance < 1000) {
+      return metersDistance.toString() + " м";
+    } else {
+      return (metersDistance.toDouble() / 1000).toStringAsFixed(1) + " км";
+    }
   }
 }
