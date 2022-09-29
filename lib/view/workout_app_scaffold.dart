@@ -16,7 +16,7 @@ class _WorkoutScaffoldState extends State<WorkoutScaffold> {
   // TODO: create navigation page interface with appbar getters
   int _currentIndex = 0;
   final _screens = <NavigatorScreen>[
-    const WorkoutPlacesScreen(),
+    WorkoutPlacesScreen(),
     const FavoritesScreen(),
     const ProfileScreen(),
   ];
