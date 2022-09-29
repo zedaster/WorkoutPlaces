@@ -38,7 +38,6 @@ class FavoritesScreen extends StatelessWidget implements NavigatorScreen {
           shrinkWrap: true,
           itemCount: state.places!.length,
           itemBuilder: (ctx, i) => PlaceInfoWidget(
-            height: 130,
             onTap: () {
               Navigator.push(
                   context,

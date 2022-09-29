@@ -23,7 +23,6 @@ class PlacesListScreenPart extends StatelessWidget {
         onTap: () {
           //Navigator.push(context, MaterialPageRoute(builder: (context) => PlaceInfoScreen(placeId: placeId)))
         },
-        height: 130,
         locationName: "Юлиса Фурчика",
         cityName: "Екатеринбург",
         image: Image.asset("assets/images/workout-place.jpg").image,
