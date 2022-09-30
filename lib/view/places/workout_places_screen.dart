@@ -39,9 +39,9 @@ class WorkoutPlacesScreen extends StatelessWidget implements NavigatorScreen {
           listener: (context, state) {},
           builder: (context, state) {
             if (state.status == PlacesStatus.initializing) {
-              return const Center(
+              return Center(
                   child: CircularProgressIndicator(
-                color: Color(0xFF27AE60),
+                color: Theme.of(context).primaryColor,
               ));
             }
 
@@ -49,9 +49,9 @@ class WorkoutPlacesScreen extends StatelessWidget implements NavigatorScreen {
               return Stack(
                 children: [
                   _placesList(context, state),
-                  const Align(
+                  Align(
                     child: LinearProgressIndicator(
-                      color: Color(0xFF27AE60),
+                      color: Theme.of(context).primaryColor,
                     ),
                     alignment: Alignment.bottomCenter,
                   )
@@ -76,6 +76,7 @@ class WorkoutPlacesScreen extends StatelessWidget implements NavigatorScreen {
   Widget _placesList(BuildContext context, PlacesState state) {
     return ListView.separated(
       key: const PageStorageKey(0),
+      // To save position on pushing extra places
       controller: _scrollController,
       padding: const EdgeInsets.only(bottom: 80, top: 10, left: 10, right: 10),
       separatorBuilder: (BuildContext context, int index) {

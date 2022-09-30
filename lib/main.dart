@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:workout_places_app/bloc/edit_review/edit_review_bloc.dart';
@@ -80,8 +79,13 @@ class WorkoutApp extends StatelessWidget {
               backgroundColor: Colors.white,
               foregroundColor: Colors.black,
             ),
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              backgroundColor: Colors.white,
+              selectedItemColor: Color(0xFF27AE60),
+              unselectedItemColor: Colors.black,
+            ),
             backgroundColor: const Color(0xFFE5E5E5),
-            primaryColor: const Color(0xFF00EB00),
+            primaryColor: const Color(0xFF27AE60),
           ),
           home: const WorkoutScaffold(),
         ),
@@ -89,17 +93,17 @@ class WorkoutApp extends StatelessWidget {
     );
   }
 
-  void _initFirebase() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
-  }
+// void _initFirebase() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+// }
 }
 
 class IgnoreCertificateHttpOverrides extends HttpOverrides {
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)
-      ..badCertificateCallback = (X509Certificate cert, String host,
-          int port) => true;
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

@@ -27,9 +27,9 @@ class _WorkoutScaffoldState extends State<WorkoutScaffold> {
       appBar: AppBar(
         title: Text(
           _screens[_currentIndex].appBarTitle,
-          style: const TextStyle(color: Colors.black),
+          style: TextStyle(color: Theme.of(context).appBarTheme.foregroundColor),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
       ),
       body: _screens[_currentIndex].asWidget,
       backgroundColor: Theme.of(context).backgroundColor,
@@ -40,8 +40,6 @@ class _WorkoutScaffoldState extends State<WorkoutScaffold> {
         onTap: (index) => setState(() => _currentIndex = index),
         showUnselectedLabels: false,
         showSelectedLabels: false,
-        selectedItemColor: const Color(0xFF00EB00),
-        unselectedItemColor: Colors.black,
         iconSize: 30,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.list), label: "Площадки"),

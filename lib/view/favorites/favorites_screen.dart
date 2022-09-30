@@ -22,15 +22,19 @@ class FavoritesScreen extends StatelessWidget implements NavigatorScreen {
       listener: (context, state) {},
       builder: (context, state) {
         if (state.status == FavoritesStatus.initializing) {
-          return const Center(child: Text("Loading..."));
+          return Center(
+            child: CircularProgressIndicator(
+              color: Theme.of(context).primaryColor,
+            ),
+          );
           // TODO: Add loading animation
         } else if (state.places!.isEmpty) {
           return const Center(child: Text("У вас пока нет избранных площадок"));
         }
         // TODO: Show loading status and remove loading condition above
         return ListView.separated(
-          padding: const EdgeInsets.only(
-              bottom: 80, top: 10, left: 10, right: 10),
+          padding:
+              const EdgeInsets.only(bottom: 80, top: 10, left: 10, right: 10),
           separatorBuilder: (BuildContext context, int index) {
             return const SizedBox(height: 10);
           },

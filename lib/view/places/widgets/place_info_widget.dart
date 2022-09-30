@@ -79,8 +79,7 @@ class PlaceInfoWidget extends StatelessWidget {
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold)),
                               const SizedBox(height: 2),
-                              PlaceFeaturesText(
-                                  novelty: novelty, size: size)
+                              PlaceFeaturesText(novelty: novelty, size: size)
                             ],
                           ),
                         ),
@@ -123,13 +122,23 @@ class _PlaceImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          image: DecorationImage(
-              fit: BoxFit.fitWidth,
-              colorFilter: ColorFilter.mode(
-                  Colors.black.withOpacity(0.25), BlendMode.srcOver),
-              image: image)),
+    return Image(
+      width: double.infinity,
+      fit: BoxFit.fitWidth,
+      image: image,
+      loadingBuilder: (context, widget, event) {
+        if (event == null) {
+          return ColorFiltered(
+            colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.25), BlendMode.srcOver),
+            child: widget,
+          );
+        }
+        return Center(
+          child:
+              CircularProgressIndicator(color: Theme.of(context).primaryColor),
+        );
+      },
     );
   }
 }
