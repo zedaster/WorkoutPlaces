@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_places_app/domain/models/place/workout_novelty.dart';
 import 'package:workout_places_app/domain/models/place/workout_size.dart';
